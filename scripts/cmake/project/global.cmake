@@ -1,0 +1,8 @@
+# * This helps with test run order dependencies.
+set(ROBOTICS_CORRECTNESS_TESTS_FIXTURE Robotics-correctness-tests)
+set(ROBOTICS_EXPORT_HEADER_DIR ${PROJECT_SOURCE_DIR}/include)
+
+# * CPack
+set(CPACK_PACKAGE_VENDOR "UseTheForce")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set(CPACK_MONOLITHIC_INSTALL ON)

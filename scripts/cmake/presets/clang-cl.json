@@ -1,0 +1,160 @@
+{
+  "version": 8,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 28,
+    "patch": 0
+  },
+  "include": [
+    "common.json"
+  ],
+  "$schema": "https://cmake.org/cmake/help/latest/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json",
+  "configurePresets": [
+    {
+      "name": "clang-cl",
+      "inherits": "common",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang-cl",
+        "CMAKE_CXX_COMPILER": "clang-cl"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "clang-cl",
+      "displayName": "Builds with Ninja in release using clang-cl.",
+      "configuration": "Release",
+      "configurePreset": "clang-cl",
+      "targets": "install"
+    },
+    {
+      "name": "clang-cl-debug",
+      "displayName": "Builds with Ninja in debug using clang-cl.",
+      "configuration": "Debug",
+      "configurePreset": "clang-cl"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "clang-cl",
+      "displayName": "Runs tests in release using clang-cl.",
+      "configuration": "Release",
+      "configurePreset": "clang-cl",
+      "inherits": "correctness"
+    },
+    {
+      "name": "clang-cl-debug",
+      "displayName": "Runs tests in debug using clang-cl.",
+      "configuration": "Debug",
+      "configurePreset": "clang-cl",
+      "inherits": "correctness"
+    },
+    {
+      "name": "clang-cl-bench",
+      "displayName": "Benchmarks project in debug using clang-cl.",
+      "configuration": "Release",
+      "configurePreset": "clang-cl",
+      "inherits": "bench"
+    }
+  ],
+  "packagePresets": [
+    {
+      "name": "clang-cl",
+      "displayName": "Package for release built using clang-cl.",
+      "configurations": [
+        "Release"
+      ],
+      "configurePreset": "clang-cl"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "clang-cl",
+      "displayName": "Builds and tests project in release using clang-cl.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "clang-cl"
+        },
+        {
+          "type": "build",
+          "name": "clang-cl"
+        },
+        {
+          "type": "test",
+          "name": "clang-cl"
+        }
+      ]
+    },
+    {
+      "name": "clang-cl-debug",
+      "displayName": "Builds and tests project in debug using clang-cl.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "clang-cl"
+        },
+        {
+          "type": "build",
+          "name": "clang-cl-debug"
+        },
+        {
+          "type": "test",
+          "name": "clang-cl-debug"
+        }
+      ]
+    },
+    {
+      "name": "clang-cl-bench",
+      "displayName": "Benchmarks project in release using clang-cl.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "clang-cl"
+        },
+        {
+          "type": "build",
+          "name": "clang-cl"
+        },
+        {
+          "type": "test",
+          "name": "clang-cl-bench"
+        }
+      ]
+    },
+    {
+      "name": "clang-cl-all",
+      "displayName": "Builds and tests everything using clang-cl.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "clang-cl"
+        },
+        {
+          "type": "build",
+          "name": "clang-cl-debug"
+        },
+        {
+          "type": "test",
+          "name": "clang-cl-debug"
+        },
+        {
+          "type": "build",
+          "name": "clang-cl"
+        },
+        {
+          "type": "test",
+          "name": "clang-cl"
+        },
+        {
+          "type": "test",
+          "name": "clang-cl-bench"
+        },
+        {
+          "type": "package",
+          "name": "clang-cl"
+        }
+      ]
+    }
+  ]
+}

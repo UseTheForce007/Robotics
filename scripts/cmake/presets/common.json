@@ -1,0 +1,71 @@
+{
+  "version": 8,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 28,
+    "patch": 0
+  },
+  "$schema": "https://cmake.org/cmake/help/latest/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json",
+  "configurePresets": [
+    {
+      "name": "common",
+      "hidden": true,
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/${hostSystemName}/${presetName}/install",
+        "CPACK_PACKAGE_DIRECTORY": "${sourceDir}/build/${hostSystemName}/${presetName}/package",
+        "FETCHCONTENT_UPDATES_DISCONNECTED": "ON",
+        "FETCHCONTENT_QUIET": "ON",
+        "ROBOTICS_ENABLE_DOC": "ON",
+        "ROBOTICS_ENABLE_TESTS": "ON",
+        "ROBOTICS_ENABLE_WARNINGS": "ON",
+        "ROBOTICS_USE_PCH": "ON",
+        "ROBOTICS_ENABLE_CODECOVERAGE": "ON",
+        "ROBOTICS_ENABLE_SANITIZERS": "ON",
+        "ROBOTICS_EXPORT_COMPILE_COMMANDS": "ON"
+      },
+      "binaryDir": "${sourceDir}/build/${hostSystemName}/${presetName}"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "common",
+      "description": "Shared defaults for tests.",
+      "hidden": true,
+      "output": {
+        "outputOnFailure": true,
+        "shortProgress": true,
+        "labelSummary": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": false
+      }
+    },
+    {
+      "name": "correctness",
+      "inherits": "common",
+      "hidden": true,
+      "filter": {
+        "exclude": {
+          "name": "benchmark"
+        }
+      }
+    },
+    {
+      "name": "bench",
+      "inherits": "common",
+      "hidden": true,
+      "filter": {
+        "exclude": {
+          "fixtures": {
+            "any": "Robotics-correctness-tests"
+          }
+        },
+        "include": {
+          "name": "benchmark"
+        }
+      }
+    }
+  ]
+}

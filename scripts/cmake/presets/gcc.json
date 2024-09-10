@@ -1,0 +1,165 @@
+{
+  "version": 8,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 28,
+    "patch": 0
+  },
+  "include": [
+    "common.json"
+  ],
+  "$schema": "https://cmake.org/cmake/help/latest/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json",
+  "configurePresets": [
+    {
+      "name": "gcc",
+      "inherits": "common",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
+        "ROBOTICS_GCOV_EXE": "gcov"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "gcc",
+      "displayName": "Builds with Ninja in release using gcc.",
+      "configuration": "Release",
+      "configurePreset": "gcc",
+      "targets": "install"
+    },
+    {
+      "name": "gcc-debug",
+      "displayName": "Builds with Ninja in debug using gcc.",
+      "configuration": "Debug",
+      "configurePreset": "gcc"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "gcc",
+      "displayName": "Runs tests in release using gcc.",
+      "configuration": "Release",
+      "configurePreset": "gcc",
+      "inherits": "correctness"
+    },
+    {
+      "name": "gcc-debug",
+      "displayName": "Runs tests in debug using gcc.",
+      "configuration": "Debug",
+      "configurePreset": "gcc",
+      "inherits": "correctness"
+    },
+    {
+      "name": "gcc-bench",
+      "displayName": "Benchmarks in release using gcc.",
+      "configuration": "Release",
+      "configurePreset": "gcc",
+      "inherits": "bench"
+    }
+  ],
+  "packagePresets": [
+    {
+      "name": "gcc",
+      "displayName": "Package for release built using gcc.",
+      "configurations": [
+        "Release"
+      ],
+      "configurePreset": "gcc"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "gcc",
+      "displayName": "Builds and tests project in release using gcc.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "gcc"
+        },
+        {
+          "type": "build",
+          "name": "gcc"
+        },
+        {
+          "type": "test",
+          "name": "gcc"
+        },
+        {
+          "type": "package",
+          "name": "gcc"
+        }
+      ]
+    },
+    {
+      "name": "gcc-debug",
+      "displayName": "Builds and tests project in debug using gcc.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "gcc"
+        },
+        {
+          "type": "build",
+          "name": "gcc-debug"
+        },
+        {
+          "type": "test",
+          "name": "gcc-debug"
+        }
+      ]
+    },
+    {
+      "name": "gcc-bench",
+      "displayName": "Benchmarks project in release using gcc.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "gcc"
+        },
+        {
+          "type": "build",
+          "name": "gcc"
+        },
+        {
+          "type": "test",
+          "name": "gcc-bench"
+        }
+      ]
+    },
+    {
+      "name": "gcc-all",
+      "displayName": "Builds and tests everything using gcc.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "gcc"
+        },
+        {
+          "type": "build",
+          "name": "gcc-debug"
+        },
+        {
+          "type": "test",
+          "name": "gcc-debug"
+        },
+        {
+          "type": "build",
+          "name": "gcc"
+        },
+        {
+          "type": "test",
+          "name": "gcc"
+        },
+        {
+          "type": "test",
+          "name": "gcc-bench"
+        },
+        {
+          "type": "package",
+          "name": "gcc"
+        }
+      ]
+    }
+  ]
+}

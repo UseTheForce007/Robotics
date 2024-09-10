@@ -1,0 +1,18 @@
+{
+  "version": 8,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 28,
+    "patch": 0
+  },
+  "include": [
+    "scripts/cmake/presets/clang.json",
+    "scripts/cmake/presets/clang-18.json",
+    "scripts/cmake/presets/clang-cl.json",
+    "scripts/cmake/presets/default.json",
+    "scripts/cmake/presets/gcc.json",
+    "scripts/cmake/presets/gcc-13.json",
+    "scripts/cmake/presets/msvc.json"
+  ],
+  "$schema": "https://cmake.org/cmake/help/latest/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json"
+}

@@ -1,0 +1,167 @@
+{
+  "version": 8,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 28,
+    "patch": 0
+  },
+  "include": [
+    "common.json"
+  ],
+  "$schema": "https://cmake.org/cmake/help/latest/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json",
+  "configurePresets": [
+    {
+      "name": "clang-18",
+      "inherits": "common",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang-18",
+        "CMAKE_CXX_COMPILER": "clang++-18",
+        "ROBOTICS_CLANG_TIDY": "clang-tidy-18",
+        "ROBOTICS_USE_LIBCXX": "ON",
+        "ROBOTICS_GCOV_EXE": "llvm-cov-18 gcov"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "clang-18",
+      "displayName": "Builds with Ninja in release using clang-18.",
+      "configuration": "Release",
+      "configurePreset": "clang-18",
+      "targets": "install"
+    },
+    {
+      "name": "clang-18-debug",
+      "displayName": "Builds with Ninja in debug using clang-18.",
+      "configuration": "Debug",
+      "configurePreset": "clang-18"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "clang-18",
+      "displayName": "Runs tests in release using clang-18.",
+      "configuration": "Release",
+      "configurePreset": "clang-18",
+      "inherits": "correctness"
+    },
+    {
+      "name": "clang-18-debug",
+      "displayName": "Runs tests in debug using clang-18.",
+      "configuration": "Debug",
+      "configurePreset": "clang-18",
+      "inherits": "correctness"
+    },
+    {
+      "name": "clang-18-bench",
+      "displayName": "Benchmarks project in debug using clang-18.",
+      "configuration": "Release",
+      "configurePreset": "clang-18",
+      "inherits": "bench"
+    }
+  ],
+  "packagePresets": [
+    {
+      "name": "clang-18",
+      "displayName": "Package for release built using clang-18.",
+      "configurations": [
+        "Release"
+      ],
+      "configurePreset": "clang-18"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "clang-18",
+      "displayName": "Builds and tests project in release using clang-18.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "clang-18"
+        },
+        {
+          "type": "build",
+          "name": "clang-18"
+        },
+        {
+          "type": "test",
+          "name": "clang-18"
+        },
+        {
+          "type": "package",
+          "name": "clang-18"
+        }
+      ]
+    },
+    {
+      "name": "clang-18-debug",
+      "displayName": "Builds and tests project in debug using clang-18.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "clang-18"
+        },
+        {
+          "type": "build",
+          "name": "clang-18-debug"
+        },
+        {
+          "type": "test",
+          "name": "clang-18-debug"
+        }
+      ]
+    },
+    {
+      "name": "clang-18-bench",
+      "displayName": "Benchmarks project in release using clang-18.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "clang-18"
+        },
+        {
+          "type": "build",
+          "name": "clang-18"
+        },
+        {
+          "type": "test",
+          "name": "clang-18-bench"
+        }
+      ]
+    },
+    {
+      "name": "clang-18-all",
+      "displayName": "Builds and tests everything using clang-18.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "clang-18"
+        },
+        {
+          "type": "build",
+          "name": "clang-18-debug"
+        },
+        {
+          "type": "test",
+          "name": "clang-18-debug"
+        },
+        {
+          "type": "build",
+          "name": "clang-18"
+        },
+        {
+          "type": "test",
+          "name": "clang-18"
+        },
+        {
+          "type": "test",
+          "name": "clang-18-bench"
+        },
+        {
+          "type": "package",
+          "name": "clang-18"
+        }
+      ]
+    }
+  ]
+}

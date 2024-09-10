@@ -1,0 +1,164 @@
+{
+  "version": 8,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 28,
+    "patch": 0
+  },
+  "include": [
+    "common.json"
+  ],
+  "$schema": "https://cmake.org/cmake/help/latest/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json",
+  "configurePresets": [
+    {
+      "name": "msvc",
+      "inherits": "common",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "cl",
+        "CMAKE_CXX_COMPILER": "cl"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "msvc",
+      "displayName": "Builds with Ninja in release using msvc.",
+      "configuration": "Release",
+      "configurePreset": "msvc",
+      "targets": "install"
+    },
+    {
+      "name": "msvc-debug",
+      "displayName": "Builds with Ninja in debug using msvc.",
+      "configuration": "Debug",
+      "configurePreset": "msvc"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "msvc-debug",
+      "displayName": "Runs tests in debug using msvc.",
+      "configuration": "Debug",
+      "configurePreset": "msvc",
+      "inherits": "correctness"
+    },
+    {
+      "name": "msvc",
+      "displayName": "Runs tests in release using msvc.",
+      "configuration": "Release",
+      "configurePreset": "msvc",
+      "inherits": "correctness"
+    },
+    {
+      "name": "msvc-bench",
+      "displayName": "Runs tests in release using msvc.",
+      "configuration": "Release",
+      "configurePreset": "msvc",
+      "inherits": "bench"
+    }
+  ],
+  "packagePresets": [
+    {
+      "name": "msvc",
+      "displayName": "Package for release built using msvc.",
+      "configurations": [
+        "Release"
+      ],
+      "configurePreset": "msvc"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "msvc",
+      "displayName": "Builds and tests project in release using msvc.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "msvc"
+        },
+        {
+          "type": "build",
+          "name": "msvc"
+        },
+        {
+          "type": "test",
+          "name": "msvc"
+        },
+        {
+          "type": "package",
+          "name": "msvc"
+        }
+      ]
+    },
+    {
+      "name": "msvc-debug",
+      "displayName": "Builds and tests project in debug using msvc.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "msvc"
+        },
+        {
+          "type": "build",
+          "name": "msvc-debug"
+        },
+        {
+          "type": "test",
+          "name": "msvc-debug"
+        }
+      ]
+    },
+    {
+      "name": "msvc-bench",
+      "displayName": "Benchmarks project in release using msvc.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "msvc"
+        },
+        {
+          "type": "build",
+          "name": "msvc"
+        },
+        {
+          "type": "test",
+          "name": "msvc-bench"
+        }
+      ]
+    },
+    {
+      "name": "msvc-all",
+      "displayName": "Builds and tests project using msvc.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "msvc"
+        },
+        {
+          "type": "build",
+          "name": "msvc-debug"
+        },
+        {
+          "type": "test",
+          "name": "msvc-debug"
+        },
+        {
+          "type": "build",
+          "name": "msvc"
+        },
+        {
+          "type": "test",
+          "name": "msvc"
+        },
+        {
+          "type": "test",
+          "name": "msvc-bench"
+        },
+        {
+          "type": "package",
+          "name": "msvc"
+        }
+      ]
+    }
+  ]
+}

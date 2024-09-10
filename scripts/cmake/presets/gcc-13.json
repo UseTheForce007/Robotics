@@ -1,0 +1,165 @@
+{
+  "version": 8,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 28,
+    "patch": 0
+  },
+  "include": [
+    "common.json"
+  ],
+  "$schema": "https://cmake.org/cmake/help/latest/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json",
+  "configurePresets": [
+    {
+      "name": "gcc-13",
+      "inherits": "common",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "gcc-13",
+        "CMAKE_CXX_COMPILER": "g++-13",
+        "ROBOTICS_GCOV_EXE": "gcov-13"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "gcc-13",
+      "displayName": "Builds with Ninja in release using gcc-13.",
+      "configuration": "Release",
+      "configurePreset": "gcc-13",
+      "targets": "install"
+    },
+    {
+      "name": "gcc-13-debug",
+      "displayName": "Builds with Ninja in debug using gcc-13.",
+      "configuration": "Debug",
+      "configurePreset": "gcc-13"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "gcc-13",
+      "displayName": "Runs tests in release using gcc-13.",
+      "configuration": "Release",
+      "configurePreset": "gcc-13",
+      "inherits": "correctness"
+    },
+    {
+      "name": "gcc-13-debug",
+      "displayName": "Runs tests in debug using gcc-13.",
+      "configuration": "Debug",
+      "configurePreset": "gcc-13",
+      "inherits": "correctness"
+    },
+    {
+      "name": "gcc-13-bench",
+      "displayName": "Benchmarks in release using gcc-13.",
+      "configuration": "Release",
+      "configurePreset": "gcc-13",
+      "inherits": "bench"
+    }
+  ],
+  "packagePresets": [
+    {
+      "name": "gcc-13",
+      "displayName": "Package for release built using gcc-13.",
+      "configurations": [
+        "Release"
+      ],
+      "configurePreset": "gcc-13"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "gcc-13",
+      "displayName": "Builds and tests project in release using gcc-13.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "gcc-13"
+        },
+        {
+          "type": "build",
+          "name": "gcc-13"
+        },
+        {
+          "type": "test",
+          "name": "gcc-13"
+        },
+        {
+          "type": "package",
+          "name": "gcc-13"
+        }
+      ]
+    },
+    {
+      "name": "gcc-13-debug",
+      "displayName": "Builds and tests project in debug using gcc-13.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "gcc-13"
+        },
+        {
+          "type": "build",
+          "name": "gcc-13-debug"
+        },
+        {
+          "type": "test",
+          "name": "gcc-13-debug"
+        }
+      ]
+    },
+    {
+      "name": "gcc-13-bench",
+      "displayName": "Builds and tests project in release using gcc-13.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "gcc-13"
+        },
+        {
+          "type": "build",
+          "name": "gcc-13"
+        },
+        {
+          "type": "test",
+          "name": "gcc-13-bench"
+        }
+      ]
+    },
+    {
+      "name": "gcc-13-all",
+      "displayName": "Builds and tests everything using gcc-13.",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "gcc-13"
+        },
+        {
+          "type": "build",
+          "name": "gcc-13-debug"
+        },
+        {
+          "type": "test",
+          "name": "gcc-13-debug"
+        },
+        {
+          "type": "build",
+          "name": "gcc-13"
+        },
+        {
+          "type": "test",
+          "name": "gcc-13"
+        },
+        {
+          "type": "test",
+          "name": "gcc-13-bench"
+        },
+        {
+          "type": "package",
+          "name": "gcc-13"
+        }
+      ]
+    }
+  ]
+}
