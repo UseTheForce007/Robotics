@@ -1,10 +1,14 @@
 # * Get current folder basename to use as the output target name.
+
+find_package(Eigen3 REQUIRED)
+find_package(Python3 COMPONENTS Interpreter Development NumPy REQUIRED)
 set(myTargetName "Robotics-dwa")
 
 add_executable(
 
     ${myTargetName}
-    dwa.cpp
+    dwa_local.cpp
+    dynamic_window_approach.cpp
 )
 
 set_target_properties(
@@ -46,7 +50,8 @@ target_compile_options(
     $<$<COMPILE_LANGUAGE:C>:${ROBOTICS_C_FLAGS}>
 )
 
-# target_include_directories(${myTargetName} PUBLIC ${ROBOTICS_EXPORT_HEADER_DIR})
+target_include_directories(${myTargetName} PUBLIC include ${EIGEN3_INCLUDE_DIR} ${Python3_INCLUDE_DIRS} ${Python3_NumPy_INCLUDE_DIRS} ~/ros2_ws/extern/matplotlib-cpp)
+target_link_libraries(${myTargetName} PRIVATE Eigen3::Eigen ${Python3_LIBRARIES})
 install(
     TARGETS ${myTargetName}
     RUNTIME DESTINATION bin

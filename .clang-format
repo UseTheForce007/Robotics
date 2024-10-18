@@ -1,0 +1,35 @@
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortIfStatementsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: false
+AlwaysBreakTemplateDeclarations: Yes
+BreakBeforeBraces: Attach
+BinPackArguments: false
+BinPackParameters: false
+ColumnLimit: 120
+EmptyLineBeforeAccessModifier: Always
+
+UseTab: ForIndentation
+IndentWidth: 2
+TabWidth: 2
+PointerAlignment: Left
+IndentCaseLabels: true
+NamespaceIndentation: All
+FixNamespaceComments: true
+ShortNamespaceLines: 0
+QualifierAlignment: Right
+SeparateDefinitionBlocks: Always
+IndentPPDirectives: AfterHash
+SortIncludes: true
+IncludeCategories:
+  # "*.h". Probably external exports.
+  - Regex: '"[A-Za-z0-9]+\.h"'
+    Priority: 1
+  # "*.hpp". Most of the internal project headers.
+  - Regex: '"[A-Za-z0-9]+\.hpp"'
+    Priority: 2
+  # <> with extension. C standard lib or external system includes.
+  - Regex: '<([A-Za-z0-9.\Q/-_\E])+>'
+    Priority: 3
+  # <> without extension. C++ standard lib.
+  - Regex: '<([A-Za-z0-9\Q/-_\E])+>'
+    Priority: 4

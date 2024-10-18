@@ -1,0 +1,31 @@
+# C++ Robotics Algorithms Explorer
+
+This project is dedicated to exploring and implementing various robotics algorithms in C++, focusing on:
+
+- Path planning
+- Motion planning
+- Control systems
+
+## Overview
+
+The goal of this project is to provide practical implementations and demonstrations of key robotics algorithms, serving as both a learning resource and a reference for robotics enthusiasts and developers.
+
+## Features
+
+- Implementation of popular path planning algorithms
+- Motion planning techniques for robotic systems
+- Control system algorithms for precise robot movement
+
+## Getting Started
+
+1. Clone the repository
+2. Install necessary dependencies (Eigen3, Python3, matplotlib-cpp)
+3. Build the project using your preferred C++ compiler
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
